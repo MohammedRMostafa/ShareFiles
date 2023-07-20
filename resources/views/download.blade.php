@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', 'Download Page')
 @section('card_title', 'Download File')
 @section('content')
 

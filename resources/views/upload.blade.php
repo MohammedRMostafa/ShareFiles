@@ -1,5 +1,6 @@
 @extends('layouts.master')
-@section('card_title', 'Your File Uploaded Succesfully')
+@section('title', 'File Ready')
+@section('card_title', 'Your File Uploaded Successfully')
 @section('content')
 
     <h5 class="card-title">{{ $shareFile->title }}</h5>

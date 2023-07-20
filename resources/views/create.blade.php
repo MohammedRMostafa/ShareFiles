@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', 'Upload File')
 @section('card_title', 'Upload File')
 @section('content')
     <form action="{{ route('ShareFile.store') }}" method="post" enctype="multipart/form-data">
