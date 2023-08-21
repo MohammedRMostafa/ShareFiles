@@ -23,7 +23,7 @@ class ShareFileRequest extends FormRequest
     {
         return [
             'title' => 'nullable|string|max:255',
-            'file' => 'required|file|max:20480'
+            'file' => 'required|file|max:10240' //10MB
         ];
     }
 
@@ -31,7 +31,7 @@ class ShareFileRequest extends FormRequest
     {
         return [
             'upload.required' => "You must use the 'Choose file' button to select which file you wish to upload",
-            'upload.max' => "Maximum file size to upload is 20MB (20480 KB)."
+            'upload.max' => "Maximum file size to upload is 10MB (10240 KB)."
         ];
     }
 }

@@ -18,9 +18,7 @@ class ShareFileController extends Controller
         $validate = $request->validated();
         $file = $request->file('file');
         $name = $file->getClientOriginalName();
-        $path = $file->store('/files', [
-            'disk' => 'public',
-        ]);
+        $path = $file->store('/files');
 
         $validate['file_name'] = $name;
         $validate['file_path'] = $path;
@@ -44,7 +42,6 @@ class ShareFileController extends Controller
     public function downloadFile($code)
     {
         $shareFile = ShareFile::where('code', $code)->first();
-        $file = public_path('storage/' . $shareFile->file_path);
-        return response()->download($file, $shareFile->file_name);
+        return response()->download(storage_path('app/' . $shareFile->file_path), $shareFile->file_name);
     }
 }
