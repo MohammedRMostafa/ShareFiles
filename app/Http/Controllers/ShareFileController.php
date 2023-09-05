@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DownloadFile;
 use App\Http\Requests\ShareFileRequest;
 use App\Models\ShareFile;
+use Illuminate\Http\Request;
 
 class ShareFileController extends Controller
 {
@@ -20,8 +22,8 @@ class ShareFileController extends Controller
         $name = $file->getClientOriginalName();
         $path = $file->store('/files');
 
-        $validate['file_name'] = $name;
-        $validate['file_path'] = $path;
+        $validate['name'] = $name;
+        $validate['path'] = $path;
         $validate['code'] = basename($path);
         ShareFile::create($validate);
         return redirect()->route('ShareFile.show');
@@ -39,9 +41,13 @@ class ShareFileController extends Controller
         return view('download', compact('shareFile'));
     }
 
-    public function downloadFile($code)
+    public function downloadFile(Request $request, $code)
     {
         $shareFile = ShareFile::where('code', $code)->first();
-        return response()->download(storage_path('app/' . $shareFile->file_path), $shareFile->file_name);
+        $request['file_id'] = $shareFile->id;
+        DownloadFile::dispatch($request);
+        $shareFile->downloaded_times += 1;
+        $shareFile->save();
+        return response()->download(storage_path('app/' . $shareFile->path), $shareFile->name);
     }
 }

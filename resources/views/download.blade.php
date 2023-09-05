@@ -7,11 +7,15 @@
         <table class="table table-dark text-start">
             <tr>
                 <th class="w-25">File Name</th>
-                <td>{{ $shareFile->file_name }}</td>
+                <td>{{ $shareFile->name }}</td>
             </tr>
             <tr>
                 <th class="w-25">Title</th>
                 <td>{{ $shareFile->title }}</td>
+            </tr>
+            <tr>
+                <th class="w-25">Number Of Downloads</th>
+                <td>{{ $shareFile->downloaded_times }}</td>
             </tr>
             <tr>
                 <th class="w-25">Action</th>

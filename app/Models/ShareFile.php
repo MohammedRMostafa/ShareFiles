@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class ShareFile extends Model
 {
 
+    protected $table = 'files';
     protected $fillable = [
-        'file_name', 'file_path', 'title', 'code',
+        'name', 'path', 'title', 'code', 'downloaded_times'
     ];
 }

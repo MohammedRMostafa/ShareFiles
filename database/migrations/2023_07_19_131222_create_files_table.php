@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('share_files', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
             $table->string('title', 255)->nullable();
             $table->string('code', 50); //for download
-            $table->string('file_name', 255);
-            $table->string('file_path', 255);
+            $table->string('name', 255);
+            $table->string('path', 255);
+            $table->integer('downloaded_times')->default(0);
             $table->timestamps();
         });
     }
